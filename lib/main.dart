@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// theming
+// pages
+import 'pages/settings.dart';
 import 'theme/theme.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final preferences = await SharedPreferences.getInstance();
+
+  themeState.value = preferences.getBool('dark_theme') ?? true;
+  vibrationState.value = preferences.getBool('vibration') ?? true;
+
   runApp(const Home());
 }

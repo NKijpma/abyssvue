@@ -51,8 +51,7 @@ class _MainShellState extends State<MainShell> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-
+        preferredSize: const Size.fromHeight(kToolbarHeight + 4),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(18, 2, 18, 2),
           child: AppBar(
@@ -81,6 +80,7 @@ class _MainShellState extends State<MainShell> {
                 maxHeight: 40,
                 minHeight: 40,
               ),
+
               barShape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(23)),
               ),
@@ -104,16 +104,37 @@ class _MainShellState extends State<MainShell> {
         onPageChanged: _onPageChanged,
         children: _pages,
       ),
-
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        onTap: _onTabTapped,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.music_note), label: "Music"),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: "Read"),
-          BottomNavigationBarItem(icon: Icon(Icons.videocam), label: "Watch"),
-        ],
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.fromLTRB(
+          20,
+          0,
+          20,
+          12 + MediaQuery.viewPaddingOf(context).bottom,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(23),
+          child: MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            removeBottom: true,
+            child: NavigationBar(
+              animationDuration: const Duration(milliseconds: 300),
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: _onTabTapped,
+              destinations: const [
+                NavigationDestination(
+                  icon: Icon(Icons.music_note),
+                  label: "music",
+                ),
+                NavigationDestination(icon: Icon(Icons.book), label: "read"),
+                NavigationDestination(
+                  icon: Icon(Icons.videocam),
+                  label: "watch",
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
