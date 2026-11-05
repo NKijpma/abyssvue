@@ -1,6 +1,6 @@
-rename abysssound
+rename / rebrand
 
-searchbar at the top!
+center text in the searchbar
 
 replace icons with custom svg icon
 
@@ -10,4 +10,15 @@ make it a epub / docx / pdf reader for novels etc
 
 make it a webp / png reader for manga / manhuas
 
-allow playing music while reading
+allow playing music /watching movies while reading
+
+when clicking logo 5x times allow developer options such as custom fonts etc
+
+possible easy file sharing through app
+
+rating system for novels
+
+connect to yt-dlp for easy video downloading
+
+add animation for clicking settings / half a turn when clicked
+

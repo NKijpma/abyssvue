@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fvp/fvp.dart' as fvp;
 
 // pages
 import 'pages/settings.dart';
@@ -7,6 +8,12 @@ import 'theme/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  fvp.registerWith(
+    options: {
+      'platforms': ['windows', 'linux', 'macos'],
+    },
+  );
 
   final preferences = await SharedPreferences.getInstance();
 

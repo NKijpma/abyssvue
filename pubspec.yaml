@@ -41,7 +41,16 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^2.0.0
+  # Packages used in the app
   shared_preferences: ^2.5.6
+
+  # Audio related packages
+  just_audio: ^0.10.6
+  audio_service: ^0.18.19
+  audio_session: ^0.2.4
+  # Video related packages
+  fvp: ^0.39.1
+  video_player: ^2.14.1
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +78,9 @@ flutter:
   # adds assets
   assets:
     - assets/images/
+    - assets/audio/
+    - assets/reading/
+    - assets/videos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -78,13 +90,13 @@ flutter:
 
   # Adds fonts
   fonts:
-     - family: Agave
-       fonts:
-         - asset: assets/fonts/AgaveNerdFontMono-Regular.ttf
+    - family: Agave
+      fonts:
+        - asset: assets/fonts/AgaveNerdFontMono-Regular.ttf
 
-     - family: JetBrains
-       fonts:
-         - asset: assets/fonts/JetBrainsMonoNerdFontMono-Regular.ttf
+    - family: JetBrains
+      fonts:
+        - asset: assets/fonts/JetBrainsMonoNerdFontMono-Regular.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

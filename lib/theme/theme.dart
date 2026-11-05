@@ -18,10 +18,9 @@ ThemeData buildTheme(Brightness brightness) {
     highlightColor: colorScheme.onSecondary.withValues(alpha: 0.1),
 
     appBarTheme: AppBarTheme(
-      centerTitle: true,
       elevation: 0,
       scrolledUnderElevation: 0,
-      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.3),
+      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.8),
       foregroundColor: colorScheme.onPrimaryContainer,
     ),
 
@@ -31,7 +30,7 @@ ThemeData buildTheme(Brightness brightness) {
         minHeight: 0,
         maxHeight: 400,
       ),
-      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.8),
+      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.9),
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(23)),
       dividerColor: colorScheme.onPrimaryContainer,
@@ -39,7 +38,7 @@ ThemeData buildTheme(Brightness brightness) {
 
     navigationBarTheme: NavigationBarThemeData(
       height: 58,
-      backgroundColor: colorScheme.surfaceContainer,
+      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.8),
       indicatorColor: colorScheme.primaryContainer,
       indicatorShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(23),

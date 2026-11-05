@@ -73,6 +73,7 @@ class _MainShellState extends State<MainShell> {
 
             title: SearchAnchor.bar(
               isFullScreen: false,
+              barLeading: const Icon(Icons.search),
               barHintText: "Search..",
               barElevation: const WidgetStatePropertyAll(0),
               constraints: const BoxConstraints(
@@ -104,12 +105,13 @@ class _MainShellState extends State<MainShell> {
         onPageChanged: _onPageChanged,
         children: _pages,
       ),
+
       bottomNavigationBar: Padding(
         padding: EdgeInsets.fromLTRB(
           20,
           0,
           20,
-          12 + MediaQuery.viewPaddingOf(context).bottom,
+          4 + MediaQuery.viewPaddingOf(context).bottom,
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(23),
@@ -123,13 +125,13 @@ class _MainShellState extends State<MainShell> {
               onDestinationSelected: _onTabTapped,
               destinations: const [
                 NavigationDestination(
-                  icon: Icon(Icons.music_note),
-                  label: "music",
+                  icon: Icon(Icons.headphones),
+                  label: "Listen",
                 ),
-                NavigationDestination(icon: Icon(Icons.book), label: "read"),
+                NavigationDestination(icon: Icon(Icons.book), label: "Read"),
                 NavigationDestination(
                   icon: Icon(Icons.videocam),
-                  label: "watch",
+                  label: "Watch",
                 ),
               ],
             ),

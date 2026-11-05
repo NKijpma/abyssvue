@@ -25,18 +25,23 @@ class SettingsPage extends StatelessWidget {
         children: [
           ValueListenableBuilder<bool>(
             valueListenable: vibrationState,
-            builder: (context, value, _) => SwitchListTile(
+            builder: (context, vibration, _) => SwitchListTile(
               title: const Text("Vibration"),
-              value: value,
+              secondary: Icon(Icons.vibration),
+              value: vibration,
               onChanged: (newValue) =>
                   _saveSettings('vibration', vibrationState, newValue),
             ),
           ),
+
           ValueListenableBuilder<bool>(
             valueListenable: themeState,
-            builder: (context, value, _) => SwitchListTile(
+            builder: (context, darkMode, _) => SwitchListTile(
               title: const Text("Dark Theme"),
-              value: value,
+              secondary: Icon(
+                darkMode ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
+              ),
+              value: darkMode,
               onChanged: (newValue) =>
                   _saveSettings('dark_theme', themeState, newValue),
             ),
