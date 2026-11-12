@@ -61,25 +61,31 @@ ThemeData buildTheme(Brightness brightness, Color seedColor) {
 }
 
 // Theming
-final ThemeData lightTheme = buildTheme(Brightness.light, Color(0xFFa5d167));
-final ThemeData darkTheme = buildTheme(Brightness.dark, Color(0xFF5a2e98));
+final ThemeData light = buildTheme(Brightness.light, Color(0xFFa5d167));
+final ThemeData dark = buildTheme(Brightness.dark, Color(0xFF5a2e98));
 final ThemeData grayScale = buildTheme(Brightness.dark, Color(0xFF555555));
-final ThemeData vampireTheme = buildTheme(Brightness.dark, Color(0xFFd53c6a));
-final ThemeData dynamicTheme = buildTheme(Brightness.dark, Color(0xFFd53c6a));
+final ThemeData vampire = buildTheme(Brightness.dark, Color(0xFFd53c6a));
+final ThemeData dynamic = buildTheme(Brightness.dark, Color(0xFFd53c6a));
+
+final Map<AppThemes, ThemeData> themeMap = {
+  AppThemes.light: light,
+  AppThemes.dark: dark,
+  AppThemes.grayscale: grayScale,
+  AppThemes.vampire: vampire,
+  AppThemes.dynamic: dynamic,
+};
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
+    return ValueListenableBuilder<AppThemes>(
       valueListenable: themeState,
-      builder: (context, isDark, _) {
+      builder: (context, currentTheme, _) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
+          theme: themeMap[currentTheme] ?? dark,
           home: const MainShell(),
         );
       },

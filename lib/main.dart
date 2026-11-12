@@ -17,7 +17,16 @@ Future<void> main() async {
 
   final preferences = await SharedPreferences.getInstance();
 
-  themeState.value = preferences.getBool('dark_theme') ?? true;
+  final savedThemeName = preferences.getString('app_theme');
+
+  if (savedThemeName != null) {
+    try {
+      themeState.value = AppThemes.values.byName(savedThemeName);
+    } catch (_) {
+      themeState.value = AppThemes.dark;
+    }
+  }
+
   vibrationState.value = preferences.getBool('vibration') ?? true;
 
   runApp(const Home());

@@ -7,3 +7,5 @@
 #### (demo images)
 
 #### (FAQ)
+- Is it bug free?
+    - NO many bugs! still in development :<
