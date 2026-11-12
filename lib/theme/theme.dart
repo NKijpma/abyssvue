@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
+// pages
 import '../pages/settings.dart';
 import '../shell.dart';
 
-ThemeData buildTheme(Brightness brightness) {
+ThemeData buildTheme(Brightness brightness, Color seedColor) {
   final colorScheme = ColorScheme.fromSeed(
-    seedColor: const Color(0xFF5a2e98),
+    seedColor: seedColor,
     brightness: brightness,
   );
 
   return ThemeData(
     useMaterial3: true,
-    fontFamily: 'Agave',
+    fontFamily: 'Jetbrains',
     colorScheme: colorScheme,
-    splashFactory: InkSparkle.splashFactory,
+    // maybe change splash idk yet look at wiki for splashfac types
+    splashFactory: InkRipple.splashFactory,
     splashColor: colorScheme.onSecondary.withValues(alpha: 0.5),
     highlightColor: colorScheme.onSecondary.withValues(alpha: 0.1),
 
@@ -58,6 +60,13 @@ ThemeData buildTheme(Brightness brightness) {
   );
 }
 
+// Theming
+final ThemeData lightTheme = buildTheme(Brightness.light, Color(0xFFa5d167));
+final ThemeData darkTheme = buildTheme(Brightness.dark, Color(0xFF5a2e98));
+final ThemeData grayScale = buildTheme(Brightness.dark, Color(0xFF555555));
+final ThemeData vampireTheme = buildTheme(Brightness.dark, Color(0xFFd53c6a));
+final ThemeData dynamicTheme = buildTheme(Brightness.dark, Color(0xFFd53c6a));
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -68,8 +77,8 @@ class Home extends StatelessWidget {
       builder: (context, isDark, _) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: buildTheme(Brightness.light),
-          darkTheme: buildTheme(Brightness.dark),
+          theme: lightTheme,
+          darkTheme: darkTheme,
           themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
           home: const MainShell(),
         );

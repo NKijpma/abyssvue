@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 // Pages
 import 'pages/book.dart';
@@ -41,7 +42,7 @@ class _MainShellState extends State<MainShell> {
     await _controller.animateToPage(
       index,
       duration: const Duration(milliseconds: 300),
-      curve: Curves.easeOutCubic,
+      curve: Curves.easeInOutCubic,
     );
     if (!mounted) return;
     _isNavigatingFromTap = false;
@@ -64,16 +65,16 @@ class _MainShellState extends State<MainShell> {
             // add easter egg if player click logo x amount of times
             leading: Center(
               child: Image.asset(
-                "assets/images/logoonly.png",
-                width: 30,
-                height: 30,
+                "assets/logo/logo_transparent.png",
+                width: 60,
+                height: 60,
                 fit: BoxFit.contain,
               ),
             ),
 
             title: SearchAnchor.bar(
               isFullScreen: false,
-              barLeading: const Icon(Icons.search),
+              barLeading: const Icon(LucideIcons.textSearch),
               barHintText: "Search..",
               barElevation: const WidgetStatePropertyAll(0),
               constraints: const BoxConstraints(
@@ -82,14 +83,16 @@ class _MainShellState extends State<MainShell> {
                 minHeight: 40,
               ),
 
-              barShape: WidgetStatePropertyAll(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(23)),
+              barShape: const WidgetStatePropertyAll(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(23)),
+                ),
               ),
-              suggestionsBuilder: (context, controller) => [],
+              suggestionsBuilder: (context, controller) => const [],
             ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.settings),
+                icon: const Icon(LucideIcons.settings),
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const SettingsPage()),
@@ -98,12 +101,6 @@ class _MainShellState extends State<MainShell> {
             ],
           ),
         ),
-      ),
-
-      body: PageView(
-        controller: _controller,
-        onPageChanged: _onPageChanged,
-        children: _pages,
       ),
 
       bottomNavigationBar: Padding(
@@ -125,18 +122,27 @@ class _MainShellState extends State<MainShell> {
               onDestinationSelected: _onTabTapped,
               destinations: const [
                 NavigationDestination(
-                  icon: Icon(Icons.headphones),
+                  icon: Icon(LucideIcons.headphones),
                   label: "Listen",
                 ),
-                NavigationDestination(icon: Icon(Icons.book), label: "Read"),
                 NavigationDestination(
-                  icon: Icon(Icons.videocam),
+                  icon: Icon(LucideIcons.bookBookmark),
+                  label: "Read",
+                ),
+                NavigationDestination(
+                  icon: Icon(LucideIcons.video),
                   label: "Watch",
                 ),
               ],
             ),
           ),
         ),
+      ),
+
+      body: PageView(
+        controller: _controller,
+        onPageChanged: _onPageChanged,
+        children: _pages,
       ),
     );
   }

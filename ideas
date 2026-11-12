@@ -1,8 +1,8 @@
-rename / rebrand
+icons are a mess (low res splashscreen, unevenness and non adaptive) ( icon is now made into a svg)
 
-center text in the searchbar
+dynamic coloring(pull from background)
 
-replace icons with custom svg icon
+replace icons with custom icons
 
 make it a mp4 player / watch movies
 
@@ -10,15 +10,26 @@ make it a epub / docx / pdf reader for novels etc
 
 make it a webp / png reader for manga / manhuas
 
+make the currently playing media follow / detach if scrolled past or other page
+
 allow playing music /watching movies while reading
 
 when clicking logo 5x times allow developer options such as custom fonts etc
 
 possible easy file sharing through app
 
-rating system for novels
+rating system for read ( 1 through 10 with decimals )
 
-connect to yt-dlp for easy video downloading
+connect to yt-dlp for easy video/music downloading
 
 add animation for clicking settings / half a turn when clicked
 
+add a refresh button to reload files
+
+find out about logistic of a download from website / link in settings
+
+// release version of the app (less laggy because no debug functionality)
+flutter run -d adb-RZCY60NV74V-a82ZhL._adb-tls-connect._tcp --release
+
+// create package command
+flutter create --org com.example --template=plugin --platforms=android,linux,macos,windows abyss_color

@@ -1,4 +1,4 @@
-name: abysseye
+name: abyssvue
 description: "A general multimedia viewer."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -30,26 +30,29 @@ environment:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/logo.png"
-  adaptive_icon_background: "#5a2e98"
-  adaptive_icon_foreground: "assets/images/logo.png"
+  remove_alpha_ios: true
+  # Ios, Web, Desktop and older Android versions take this logo
+  image_path: "assets/logo/logo.png"
+  # Modern Android versions take this logo and background color
+  adaptive_icon_foreground: "assets/logo/logo_transparent.png"
+  adaptive_icon_background: "#0b1016"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^2.0.0
   # Packages used in the app
+  # Local Storage / to share states
   shared_preferences: ^2.5.6
+  # Lucide flutter icons
+  lucide_icons_flutter: ^4.0.3
 
   # Audio related packages
   just_audio: ^0.10.6
   audio_service: ^0.18.19
   audio_session: ^0.2.4
   # Video related packages
-  fvp: ^0.39.1
+  fvp: ^0.40.0
   video_player: ^2.14.1
 
 dev_dependencies:
@@ -77,6 +80,7 @@ flutter:
 
   # adds assets
   assets:
+    - assets/logo/
     - assets/images/
     - assets/audio/
     - assets/reading/
@@ -90,10 +94,6 @@ flutter:
 
   # Adds fonts
   fonts:
-    - family: Agave
-      fonts:
-        - asset: assets/fonts/AgaveNerdFontMono-Regular.ttf
-
     - family: JetBrains
       fonts:
         - asset: assets/fonts/JetBrainsMonoNerdFontMono-Regular.ttf

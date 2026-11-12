@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fvp/fvp.dart' as fvp;
+import 'package:shared_preferences/shared_preferences.dart';
 
 // pages
 import 'pages/settings.dart';
