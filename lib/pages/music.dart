@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 final AudioPlayer player = AudioPlayer();
 
@@ -93,8 +94,8 @@ class _MusicPageState extends State<MusicPage>
                   return ListTile(
                     leading: Icon(
                       isCurrent && isPlaying
-                          ? Icons.pause_circle
-                          : Icons.play_circle,
+                          ? LucideIcons.pause
+                          : LucideIcons.play,
                       size: 36,
                     ),
                     title: Text(song.title),

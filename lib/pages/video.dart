@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoItem {
@@ -160,8 +161,8 @@ class _VideoPageState extends State<VideoPage> {
                             iconSize: 56,
                             icon: Icon(
                               _controller!.value.isPlaying
-                                  ? Icons.pause_circle_filled
-                                  : Icons.play_circle_filled,
+                                  ? LucideIcons.pause
+                                  : LucideIcons.play,
                               color: Colors.white70,
                             ),
                             onPressed: () {

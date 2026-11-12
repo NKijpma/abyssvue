@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 final ValueNotifier<bool> vibrationState = ValueNotifier(true);
 final ValueNotifier<bool> themeState = ValueNotifier(true);
 
-enum AppTheme { light, dark, grayscale, vampire, dynamic }
+enum AppThemes { light, dark, grayscale, vampire, dynamic }
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
