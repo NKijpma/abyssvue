@@ -87,7 +87,6 @@ class SettingsPage extends StatelessWidget {
                 _saveSettings('theme', themeToggle, newValue);
                 if (hapticToggle.value) {
                   HapticFeedback.vibrate();
-                  HapticFeedback.lightImpact();
                 }
               },
             ),
