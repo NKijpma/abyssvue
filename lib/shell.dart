@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 // Pages
+import '/pages/settings.dart';
 import 'pages/book.dart';
 import 'pages/music.dart';
-import 'pages/settings.dart';
 import 'pages/video.dart';
 
 class MainShell extends StatefulWidget {
@@ -48,6 +49,9 @@ class _MainShellState extends State<MainShell> {
     _isNavigatingFromTap = false;
   }
 
+  double _turns = 0.0;
+  bool _isNavigating = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,9 +67,15 @@ class _MainShellState extends State<MainShell> {
             ),
 
             // add easter egg if player click logo x amount of times
-            leading: Center(
-              child: Image.asset(
-                "assets/logo/logo_transparent.png",
+            leading: InkWell(
+              borderRadius: BorderRadius.circular(23),
+              onTap: () {
+                if (hapticToggle.value) {
+                  HapticFeedback.vibrate();
+                }
+              },
+              child: const Image(
+                image: AssetImage("assets/logo/logo_transparent.png"),
                 width: 60,
                 height: 60,
                 fit: BoxFit.contain,
@@ -90,12 +100,39 @@ class _MainShellState extends State<MainShell> {
               ),
               suggestionsBuilder: (context, controller) => const [],
             ),
+
             actions: [
-              IconButton(
-                icon: const Icon(LucideIcons.settings),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SettingsPage()),
+              AnimatedRotation(
+                turns: _turns,
+                duration: const Duration(milliseconds: 180),
+                curve: Curves.easeOutBack,
+                child: IconButton(
+                  icon: const Icon(LucideIcons.settings),
+                  onPressed: () async {
+                    if (hapticToggle.value) {
+                      HapticFeedback.vibrate();
+                    }
+
+                    if (_isNavigating) return;
+                    _isNavigating = true;
+                    setState(() {
+                      _turns += 0.5;
+                    });
+
+                    await Future.delayed(const Duration(milliseconds: 185));
+
+                    if (!context.mounted) {
+                      _isNavigating = false;
+                      return;
+                    }
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ),
+                    );
+                    _isNavigating = false;
+                  },
                 ),
               ),
             ],

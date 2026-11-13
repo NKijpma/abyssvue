@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final ValueNotifier<bool> vibrationState = ValueNotifier(true);
+enum AppThemes {
+  nineAnime("9 Anime"),
+  grayscale("Grayscale"),
+  vampiric("Vampiric"),
+  dynamic("Dynamic");
 
-enum AppThemes { light, dark, grayscale, vampire, dynamic }
+  final String displayName;
 
-final ValueNotifier<AppThemes> themeState = ValueNotifier(AppThemes.dark);
+  const AppThemes(this.displayName);
+}
+
+final ValueNotifier<bool> hapticToggle = ValueNotifier(true);
+final ValueNotifier<bool> themeToggle = ValueNotifier(true);
+final ValueNotifier<AppThemes> themeState = ValueNotifier(AppThemes.nineAnime);
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -50,19 +60,40 @@ class SettingsPage extends StatelessWidget {
 
       body: ListView(
         children: [
+          // Toggle for haptic feedback
           ValueListenableBuilder<bool>(
-            valueListenable: vibrationState,
-            builder: (context, vibration, _) => SwitchListTile(
-              title: const Text("Vibration"),
+            valueListenable: hapticToggle,
+            builder: (context, haptic, _) => SwitchListTile(
+              title: Text(haptic ? "Haptics On" : "Haptics Off"),
               secondary: Icon(
-                vibration ? LucideIcons.vibrate : LucideIcons.vibrateOff,
+                haptic ? LucideIcons.vibrate : LucideIcons.vibrateOff,
               ),
-              value: vibration,
-              onChanged: (newValue) =>
-                  _saveSettings('vibration', vibrationState, newValue),
+              value: haptic,
+              onChanged: (newValue) {
+                _saveSettings('vibration', hapticToggle, newValue);
+                HapticFeedback.vibrate();
+              },
             ),
           ),
 
+          // Toggle for dark and light mode
+          ValueListenableBuilder<bool>(
+            valueListenable: themeToggle,
+            builder: (context, isDark, _) => SwitchListTile(
+              title: Text(isDark ? "Dark Mode" : "Light Mode"),
+              secondary: Icon(isDark ? LucideIcons.moon : LucideIcons.sun),
+              value: isDark,
+              onChanged: (newValue) {
+                _saveSettings('theme', themeToggle, newValue);
+                if (hapticToggle.value) {
+                  HapticFeedback.vibrate();
+                  HapticFeedback.lightImpact();
+                }
+              },
+            ),
+          ),
+
+          // List of themes
           ValueListenableBuilder<AppThemes>(
             valueListenable: themeState,
             builder: (context, currentTheme, _) {
@@ -74,15 +105,16 @@ class SettingsPage extends StatelessWidget {
                   underline: const SizedBox(),
                   onChanged: (newTheme) {
                     if (newTheme != null) {
+                      if (hapticToggle.value) {
+                        HapticFeedback.vibrate();
+                      }
                       saveTheme(newTheme);
                     }
                   },
                   items: AppThemes.values.map((theme) {
                     return DropdownMenuItem(
                       value: theme,
-                      child: Text(
-                        theme.name[0].toUpperCase() + theme.name.substring(1),
-                      ),
+                      child: Text(theme.displayName),
                     );
                   }).toList(),
                 ),

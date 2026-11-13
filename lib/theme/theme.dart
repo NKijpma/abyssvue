@@ -4,10 +4,15 @@ import 'package:flutter/material.dart';
 import '../pages/settings.dart';
 import '../shell.dart';
 
-ThemeData buildTheme(Brightness brightness, Color seedColor) {
+ThemeData buildTheme(
+  Brightness brightness,
+  Color seedColor, {
+  DynamicSchemeVariant variant = DynamicSchemeVariant.tonalSpot,
+}) {
   final colorScheme = ColorScheme.fromSeed(
     seedColor: seedColor,
     brightness: brightness,
+    dynamicSchemeVariant: variant,
   );
 
   return ThemeData(
@@ -35,7 +40,7 @@ ThemeData buildTheme(Brightness brightness, Color seedColor) {
       backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.9),
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(23)),
-      dividerColor: colorScheme.onPrimaryContainer,
+      dividerColor: colorScheme.onSurfaceVariant,
     ),
 
     navigationBarTheme: NavigationBarThemeData(
@@ -61,18 +66,31 @@ ThemeData buildTheme(Brightness brightness, Color seedColor) {
 }
 
 // Theming
-final ThemeData light = buildTheme(Brightness.light, Color(0xFFa5d167));
-final ThemeData dark = buildTheme(Brightness.dark, Color(0xFF5a2e98));
-final ThemeData grayScale = buildTheme(Brightness.dark, Color(0xFF555555));
-final ThemeData vampire = buildTheme(Brightness.dark, Color(0xFFd53c6a));
-final ThemeData dynamic = buildTheme(Brightness.dark, Color(0xFFd53c6a));
+class ThemeConfig {
+  final Color seedColor;
+  final DynamicSchemeVariant variant;
 
-final Map<AppThemes, ThemeData> themeMap = {
-  AppThemes.light: light,
-  AppThemes.dark: dark,
-  AppThemes.grayscale: grayScale,
-  AppThemes.vampire: vampire,
-  AppThemes.dynamic: dynamic,
+  const ThemeConfig(
+    this.seedColor, {
+    this.variant = DynamicSchemeVariant.tonalSpot,
+  });
+}
+
+final Map<AppThemes, ThemeConfig> themeConfigs = {
+  AppThemes.nineAnime: const ThemeConfig(Color(0xFF5a2e98)),
+
+  AppThemes.grayscale: const ThemeConfig(
+    Color(0xFF333333),
+    variant: DynamicSchemeVariant.neutral,
+  ),
+
+  AppThemes.vampiric: const ThemeConfig(
+    Color(0xFFd53c6a),
+    variant: DynamicSchemeVariant.vibrant,
+  ),
+
+  // grabs color from users wallpaper to style the app
+  AppThemes.dynamic: const ThemeConfig(Color(0xFFd53c6a)),
 };
 
 class Home extends StatelessWidget {
@@ -80,13 +98,26 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<AppThemes>(
-      valueListenable: themeState,
-      builder: (context, currentTheme, _) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: themeMap[currentTheme] ?? dark,
-          home: const MainShell(),
+    return ValueListenableBuilder<bool>(
+      valueListenable: themeToggle,
+      builder: (context, isDark, _) {
+        return ValueListenableBuilder<AppThemes>(
+          valueListenable: themeState,
+          builder: (context, currentTheme, _) {
+            final theme =
+                themeConfigs[currentTheme] ?? ThemeConfig(Color(0xFF5a2e98));
+            final brightness = isDark ? Brightness.dark : Brightness.light;
+
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: buildTheme(
+                brightness,
+                theme.seedColor,
+                variant: theme.variant,
+              ),
+              home: const MainShell(),
+            );
+          },
         );
       },
     );

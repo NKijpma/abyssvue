@@ -23,11 +23,12 @@ Future<void> main() async {
     try {
       themeState.value = AppThemes.values.byName(savedThemeName);
     } catch (_) {
-      themeState.value = AppThemes.dark;
+      themeState.value = AppThemes.nineAnime;
     }
   }
 
-  vibrationState.value = preferences.getBool('vibration') ?? true;
+  hapticToggle.value = preferences.getBool('vibration') ?? true;
+  themeToggle.value = preferences.getBool('theme') ?? true;
 
   runApp(const Home());
 }

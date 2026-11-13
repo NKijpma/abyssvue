@@ -17,11 +17,15 @@ class VideoPage extends StatefulWidget {
   State<VideoPage> createState() => _VideoPageState();
 }
 
-class _VideoPageState extends State<VideoPage> {
+class _VideoPageState extends State<VideoPage>
+    with AutomaticKeepAliveClientMixin {
   late Future<List<VideoItem>> _videosFuture;
   VideoPlayerController? _controller;
   String? _currentPath;
   bool _isLoading = false;
+
+  @override
+  bool get wantKeepAlive => true;
 
   static const List<String> _videoExtensions = [
     '.mp4',
@@ -112,6 +116,7 @@ class _VideoPageState extends State<VideoPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final theme = Theme.of(context);
 
     return Scaffold(
