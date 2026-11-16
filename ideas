@@ -1,6 +1,6 @@
 icons are a mess (low res splashscreen, unevenness and non adaptive) ( icon is now made into a svg)
 
-make the icon white and make it change color with the theming
+move the logo down a bit on the 1024 x 1024 canvas (5 nods down)
 
 dynamic coloring(pull from background)
 

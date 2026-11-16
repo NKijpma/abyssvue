@@ -76,8 +76,8 @@ class _MainShellState extends State<MainShell> {
               },
               child: Center(
                 child: SizedBox(
-                  width: 38,
-                  height: 38,
+                  width: 36,
+                  height: 36,
                   child: SvgPicture.asset(
                     "assets/logo/logo.svg",
                     colorFilter: ColorFilter.mode(
@@ -111,7 +111,7 @@ class _MainShellState extends State<MainShell> {
             actions: [
               AnimatedRotation(
                 turns: _turns,
-                duration: const Duration(milliseconds: 180),
+                duration: const Duration(milliseconds: 188),
                 curve: Curves.easeOutBack,
                 child: IconButton(
                   icon: const Icon(LucideIcons200.settings),
@@ -126,7 +126,7 @@ class _MainShellState extends State<MainShell> {
                       _turns += 0.5;
                     });
 
-                    await Future.delayed(const Duration(milliseconds: 185));
+                    await Future.delayed(const Duration(milliseconds: 190));
 
                     if (!context.mounted) {
                       _isNavigating = false;

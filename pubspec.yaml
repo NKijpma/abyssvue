@@ -29,12 +29,12 @@ environment:
 # versions available, run `flutter pub outdated`.
 flutter_launcher_icons:
   android: true
-  ios: true
+  ios: false
   remove_alpha_ios: true
   # Ios, Web, Desktop and older Android versions take this logo
   image_path: "assets/logo/logo.png"
   # Modern Android versions take this logo and background color
-  adaptive_icon_foreground: "assets/logo/logo_transparent.png"
+  adaptive_icon_foreground: "assets/logo/logo-noBG.png"
   adaptive_icon_background: "#0b1016"
 
 dependencies:
