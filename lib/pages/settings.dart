@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:lucide_icons_flutter/lucide_icons_200.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum AppThemes {
@@ -51,7 +51,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 1,
         leading: IconButton(
-          icon: const Icon(LucideIcons.chevronLeft),
+          icon: const Icon(LucideIcons200.chevronLeft),
           onPressed: () => Navigator.pop(context),
         ),
 
@@ -66,7 +66,7 @@ class SettingsPage extends StatelessWidget {
             builder: (context, haptic, _) => SwitchListTile(
               title: Text(haptic ? "Haptics On" : "Haptics Off"),
               secondary: Icon(
-                haptic ? LucideIcons.vibrate : LucideIcons.vibrateOff,
+                haptic ? LucideIcons200.vibrate : LucideIcons200.vibrateOff,
               ),
               value: haptic,
               onChanged: (newValue) {
@@ -81,7 +81,9 @@ class SettingsPage extends StatelessWidget {
             valueListenable: themeToggle,
             builder: (context, isDark, _) => SwitchListTile(
               title: Text(isDark ? "Dark Mode" : "Light Mode"),
-              secondary: Icon(isDark ? LucideIcons.moon : LucideIcons.sun),
+              secondary: Icon(
+                isDark ? LucideIcons200.moon : LucideIcons200.sun,
+              ),
               value: isDark,
               onChanged: (newValue) {
                 _saveSettings('theme', themeToggle, newValue);
@@ -97,7 +99,7 @@ class SettingsPage extends StatelessWidget {
             valueListenable: themeState,
             builder: (context, currentTheme, _) {
               return ListTile(
-                leading: const Icon(LucideIcons.palette),
+                leading: const Icon(LucideIcons200.palette),
                 title: const Text("App Theme"),
                 trailing: DropdownButton<AppThemes>(
                   value: currentTheme,
@@ -120,6 +122,9 @@ class SettingsPage extends StatelessWidget {
               );
             },
           ),
+
+          // custom link for downloading / scrapping files
+          // jellyfin / plex link / api
         ],
       ),
     );

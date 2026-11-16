@@ -1,5 +1,7 @@
 icons are a mess (low res splashscreen, unevenness and non adaptive) ( icon is now made into a svg)
 
+make the icon white and make it change color with the theming
+
 dynamic coloring(pull from background)
 
 replace icons with custom icons

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lucide_icons_flutter/lucide_icons_200.dart';
+import 'package:lucide_icons_flutter/lucide_icons_300.dart';
 
 // Pages
-import '/pages/settings.dart';
 import 'pages/book.dart';
 import 'pages/music.dart';
+import 'pages/settings.dart';
 import 'pages/video.dart';
 
 class MainShell extends StatefulWidget {
@@ -60,10 +62,8 @@ class _MainShellState extends State<MainShell> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(18, 2, 18, 2),
           child: AppBar(
-            shape: RoundedRectangleBorder(
-              borderRadius: const BorderRadius.vertical(
-                bottom: Radius.circular(23),
-              ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(23)),
             ),
 
             // add easter egg if player click logo x amount of times
@@ -74,17 +74,24 @@ class _MainShellState extends State<MainShell> {
                   HapticFeedback.vibrate();
                 }
               },
-              child: const Image(
-                image: AssetImage("assets/logo/logo_transparent.png"),
-                width: 60,
-                height: 60,
-                fit: BoxFit.contain,
+              child: Center(
+                child: SizedBox(
+                  width: 38,
+                  height: 38,
+                  child: SvgPicture.asset(
+                    "assets/logo/logo.svg",
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.onPrimaryContainer,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
               ),
             ),
 
             title: SearchAnchor.bar(
               isFullScreen: false,
-              barLeading: const Icon(LucideIcons.textSearch),
+              barLeading: const Icon(LucideIcons200.textSearch),
               barHintText: "Search..",
               barElevation: const WidgetStatePropertyAll(0),
               constraints: const BoxConstraints(
@@ -107,7 +114,7 @@ class _MainShellState extends State<MainShell> {
                 duration: const Duration(milliseconds: 180),
                 curve: Curves.easeOutBack,
                 child: IconButton(
-                  icon: const Icon(LucideIcons.settings),
+                  icon: const Icon(LucideIcons200.settings),
                   onPressed: () async {
                     if (hapticToggle.value) {
                       HapticFeedback.vibrate();
@@ -153,21 +160,27 @@ class _MainShellState extends State<MainShell> {
             context: context,
             removeTop: true,
             removeBottom: true,
+
             child: NavigationBar(
-              animationDuration: const Duration(milliseconds: 300),
+              animationDuration: const Duration(milliseconds: 333),
               selectedIndex: _selectedIndex,
               onDestinationSelected: _onTabTapped,
               destinations: const [
                 NavigationDestination(
-                  icon: Icon(LucideIcons.headphones),
+                  icon: Icon(LucideIcons200.headphones),
+                  selectedIcon: Icon(LucideIcons300.headphones),
                   label: "Listen",
                 ),
+
                 NavigationDestination(
-                  icon: Icon(LucideIcons.bookBookmark),
+                  icon: Icon(LucideIcons200.bookBookmark),
+                  selectedIcon: Icon(LucideIcons300.bookBookmark),
                   label: "Read",
                 ),
+
                 NavigationDestination(
-                  icon: Icon(LucideIcons.video),
+                  icon: Icon(LucideIcons200.video),
+                  selectedIcon: Icon(LucideIcons300.video),
                   label: "Watch",
                 ),
               ],

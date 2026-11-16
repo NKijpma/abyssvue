@@ -37,7 +37,7 @@ ThemeData buildTheme(
         minHeight: 0,
         maxHeight: 400,
       ),
-      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.9),
+      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.98),
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(23)),
       dividerColor: colorScheme.onSurfaceVariant,
@@ -105,7 +105,8 @@ class Home extends StatelessWidget {
           valueListenable: themeState,
           builder: (context, currentTheme, _) {
             final theme =
-                themeConfigs[currentTheme] ?? ThemeConfig(Color(0xFF5a2e98));
+                themeConfigs[currentTheme] ??
+                const ThemeConfig(Color(0xFF5a2e98));
             final brightness = isDark ? Brightness.dark : Brightness.light;
 
             return MaterialApp(
