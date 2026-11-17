@@ -89,7 +89,7 @@ final Map<AppThemes, ThemeConfig> themeConfigs = {
     variant: DynamicSchemeVariant.vibrant,
   ),
 
-  // grabs color from users wallpaper to style the app
+  // grabs color from users wallpaper to style the app(still needs to be made)
   AppThemes.dynamic: const ThemeConfig(Color(0xFFd53c6a)),
 };
 

@@ -36,7 +36,7 @@ class _MainShellState extends State<MainShell> {
     }
   }
 
-  Future<void> _onTabTapped(int index) async {
+  Future<void> _onTapped(int index) async {
     if (_selectedIndex == index) return;
     setState(() {
       _selectedIndex = index;
@@ -52,6 +52,14 @@ class _MainShellState extends State<MainShell> {
   }
 
   double _turns = 0.0;
+  bool showBars = true;
+
+  void hideBars() {
+    setState(() {
+      showBars = false;
+    });
+  }
+
   bool _isNavigating = false;
 
   @override
@@ -59,131 +67,142 @@ class _MainShellState extends State<MainShell> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight + 4),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(18, 2, 18, 2),
-          child: AppBar(
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(23)),
-            ),
+        child: AnimatedSlide(
+          offset: showBars ? Offset.zero : const Offset(0, -1.3),
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(18, 2, 18, 2),
+            child: AppBar(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(23),
+                ),
+              ),
 
-            // add easter egg if player click logo x amount of times
-            leading: InkWell(
-              borderRadius: BorderRadius.circular(23),
-              onTap: () {
-                if (hapticToggle.value) {
-                  HapticFeedback.vibrate();
-                }
-              },
-              child: Center(
-                child: SizedBox(
-                  width: 36,
-                  height: 36,
-                  child: SvgPicture.asset(
-                    "assets/logo/logo.svg",
-                    colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.onPrimaryContainer,
-                      BlendMode.srcIn,
+              // add easter egg if player click logo x amount of times
+              leading: InkWell(
+                borderRadius: BorderRadius.circular(23),
+                onTap: () {
+                  if (hapticToggle.value) {
+                    HapticFeedback.vibrate();
+                  }
+                },
+                child: Center(
+                  child: SizedBox(
+                    width: 36,
+                    height: 36,
+                    child: SvgPicture.asset(
+                      "assets/logo/logo.svg",
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
 
-            title: SearchAnchor.bar(
-              isFullScreen: false,
-              barLeading: const Icon(LucideIcons200.textSearch),
-              barHintText: "Search..",
-              barElevation: const WidgetStatePropertyAll(0),
-              constraints: const BoxConstraints(
-                minWidth: 0,
-                maxHeight: 40,
-                minHeight: 40,
-              ),
-
-              barShape: const WidgetStatePropertyAll(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(23)),
+              title: SearchAnchor.bar(
+                isFullScreen: false,
+                barLeading: const Icon(LucideIcons200.textSearch),
+                barHintText: "Search..",
+                barElevation: const WidgetStatePropertyAll(0),
+                constraints: const BoxConstraints(
+                  minWidth: 0,
+                  maxHeight: 40,
+                  minHeight: 40,
                 ),
+
+                barShape: const WidgetStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(23)),
+                  ),
+                ),
+                suggestionsBuilder: (context, controller) => const [],
               ),
-              suggestionsBuilder: (context, controller) => const [],
-            ),
 
-            actions: [
-              AnimatedRotation(
-                turns: _turns,
-                duration: const Duration(milliseconds: 188),
-                curve: Curves.easeOutBack,
-                child: IconButton(
-                  icon: const Icon(LucideIcons200.settings),
-                  onPressed: () async {
-                    if (hapticToggle.value) {
-                      HapticFeedback.vibrate();
-                    }
+              actions: [
+                AnimatedRotation(
+                  turns: _turns,
+                  duration: const Duration(milliseconds: 188),
+                  curve: Curves.easeOutBack,
+                  child: IconButton(
+                    icon: const Icon(LucideIcons200.settings),
+                    onPressed: () async {
+                      if (hapticToggle.value) {
+                        HapticFeedback.vibrate();
+                      }
 
-                    if (_isNavigating) return;
-                    _isNavigating = true;
-                    setState(() {
-                      _turns += 0.5;
-                    });
+                      if (_isNavigating) return;
+                      _isNavigating = true;
+                      setState(() {
+                        _turns += 0.5;
+                      });
 
-                    await Future.delayed(const Duration(milliseconds: 190));
+                      await Future.delayed(const Duration(milliseconds: 190));
 
-                    if (!context.mounted) {
+                      if (!context.mounted) {
+                        _isNavigating = false;
+                        return;
+                      }
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsPage(),
+                        ),
+                      );
                       _isNavigating = false;
-                      return;
-                    }
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SettingsPage(),
-                      ),
-                    );
-                    _isNavigating = false;
-                  },
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
 
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.fromLTRB(
-          20,
-          0,
-          20,
-          4 + MediaQuery.viewPaddingOf(context).bottom,
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(23),
-          child: MediaQuery.removePadding(
-            context: context,
-            removeTop: true,
-            removeBottom: true,
+      bottomNavigationBar: AnimatedSlide(
+        offset: showBars ? Offset.zero : const Offset(0, 1.3),
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+            20,
+            0,
+            20,
+            4 + MediaQuery.viewPaddingOf(context).bottom,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(23),
+            child: MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              removeBottom: true,
+              child: NavigationBar(
+                animationDuration: const Duration(milliseconds: 333),
+                selectedIndex: _selectedIndex,
+                onDestinationSelected: _onTapped,
+                destinations: const [
+                  NavigationDestination(
+                    icon: Icon(LucideIcons200.headphones),
+                    selectedIcon: Icon(LucideIcons300.headphones),
+                    label: "Listen",
+                  ),
 
-            child: NavigationBar(
-              animationDuration: const Duration(milliseconds: 333),
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: _onTabTapped,
-              destinations: const [
-                NavigationDestination(
-                  icon: Icon(LucideIcons200.headphones),
-                  selectedIcon: Icon(LucideIcons300.headphones),
-                  label: "Listen",
-                ),
+                  NavigationDestination(
+                    icon: Icon(LucideIcons200.bookBookmark),
+                    selectedIcon: Icon(LucideIcons300.bookBookmark),
+                    label: "Read",
+                  ),
 
-                NavigationDestination(
-                  icon: Icon(LucideIcons200.bookBookmark),
-                  selectedIcon: Icon(LucideIcons300.bookBookmark),
-                  label: "Read",
-                ),
-
-                NavigationDestination(
-                  icon: Icon(LucideIcons200.video),
-                  selectedIcon: Icon(LucideIcons300.video),
-                  label: "Watch",
-                ),
-              ],
+                  NavigationDestination(
+                    icon: Icon(LucideIcons200.video),
+                    selectedIcon: Icon(LucideIcons300.video),
+                    label: "Watch",
+                  ),
+                ],
+              ),
             ),
           ),
         ),
