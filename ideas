@@ -1,7 +1,10 @@
+
 icons are a mess (low res splashscreen, unevenness and non adaptive) ( icon is now made into a svg)
 
 move the logo down a bit on the 1024 x 1024 canvas (2 nods down)
 maybe to the right too!?
+
+on app restart hideBars breaks and sometimes it is unresponsive you click a song nothing happens
 
 dynamic coloring(pull from background)
 
@@ -11,7 +14,7 @@ make it a mp4 player / watch movies
 
 make it a epub / docx / pdf reader for novels etc
 
-make it a webp / png reader for manga / manhuas
+make it a webp / png reader for manga / manhwas  / manhuas
 
 make the currently playing media follow / detach if scrolled past or other page
 
@@ -23,7 +26,7 @@ possible easy file sharing through app
 
 rating system for read ( 1 through 10 with decimals )
 
-connect to yt-dlp for easy video/music downloading
+connect to yt-dlp for easy video/music downloading / or listening
 
 add animation for clicking settings / half a turn when clicked
 

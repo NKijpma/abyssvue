@@ -13,7 +13,10 @@ class Song {
 }
 
 class MusicPage extends StatefulWidget {
-  const MusicPage({super.key});
+  final VoidCallback? onHideBars;
+  final VoidCallback? onShowBars;
+
+  const MusicPage({super.key, this.onHideBars, this.onShowBars});
 
   @override
   State<MusicPage> createState() => _MusicPageState();
@@ -31,15 +34,27 @@ class _MusicPageState extends State<MusicPage>
   void initState() {
     super.initState();
     _songsFuture = _loadSongsFromAssets();
+
+    player.playerStateStream.listen((state) {
+      if (state.playing) {
+        widget.onHideBars?.call();
+      } else {
+        widget.onShowBars?.call();
+      }
+    });
   }
 
   Future<List<Song>> _loadSongsFromAssets() async {
     final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
 
+    const allowedFileTypes = ['.mp3', '.m4a', '.wav', '.flac', '.aac', '.ogg'];
+
     return manifest
         .listAssets()
         .where(
-          (path) => path.startsWith('assets/audio/') && path.endsWith('.mp3'),
+          (path) =>
+              path.startsWith('assets/audio/') &&
+              allowedFileTypes.any((ext) => path.toLowerCase().endsWith(ext)),
         )
         .map((path) {
           final filename = Uri.decodeComponent(path.split('/').last);
@@ -51,7 +66,11 @@ class _MusicPageState extends State<MusicPage>
 
   Future<void> _playSong(String path) async {
     if (_currentPath == path) {
-      player.playing ? await player.pause() : await player.play();
+      if (player.playing) {
+        await player.pause();
+      } else {
+        await player.play();
+      }
       return;
     }
 

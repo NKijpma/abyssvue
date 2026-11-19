@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lucide_icons_flutter/lucide_icons_200.dart';
@@ -20,9 +21,22 @@ class MainShell extends StatefulWidget {
 class _MainShellState extends State<MainShell> {
   int _selectedIndex = 1;
   bool _isNavigatingFromTap = false;
+  bool _isNavigating = false;
+  double _turns = 0.0;
 
-  final List<Widget> _pages = const [MusicPage(), ReadPage(), VideoPage()];
+  bool bars = true;
+
+  List<Widget> get _pages => [
+    MusicPage(onHideBars: _hideBars, onShowBars: _showBars),
+    const ReadPage(),
+    const VideoPage(),
+  ];
   final PageController _controller = PageController(initialPage: 1);
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -51,16 +65,18 @@ class _MainShellState extends State<MainShell> {
     _isNavigatingFromTap = false;
   }
 
-  double _turns = 0.0;
-  bool showBars = true;
-
-  void hideBars() {
+  void _hideBars() {
+    if (_isNavigatingFromTap) return;
     setState(() {
-      showBars = false;
+      bars = false;
     });
   }
 
-  bool _isNavigating = false;
+  void _showBars() {
+    setState(() {
+      bars = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +84,7 @@ class _MainShellState extends State<MainShell> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight + 4),
         child: AnimatedSlide(
-          offset: showBars ? Offset.zero : const Offset(0, -1.3),
+          offset: bars ? Offset.zero : const Offset(0, -1.3),
           duration: Duration(milliseconds: 300),
           curve: Curves.easeInOut,
           child: Padding(
@@ -136,9 +152,7 @@ class _MainShellState extends State<MainShell> {
 
                       if (_isNavigating) return;
                       _isNavigating = true;
-                      setState(() {
-                        _turns += 0.5;
-                      });
+                      setState(() => _turns += 0.5);
 
                       await Future.delayed(const Duration(milliseconds: 190));
 
@@ -163,7 +177,7 @@ class _MainShellState extends State<MainShell> {
       ),
 
       bottomNavigationBar: AnimatedSlide(
-        offset: showBars ? Offset.zero : const Offset(0, 1.3),
+        offset: bars ? Offset.zero : const Offset(0, 1.3),
         duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
         child: Padding(
@@ -208,10 +222,20 @@ class _MainShellState extends State<MainShell> {
         ),
       ),
 
-      body: PageView(
-        controller: _controller,
-        onPageChanged: _onPageChanged,
-        children: _pages,
+      body: NotificationListener<UserScrollNotification>(
+        onNotification: (notification) {
+          if (notification.depth == 0 &&
+              notification.direction != ScrollDirection.idle) {
+            _showBars();
+          }
+          return false;
+        },
+
+        child: PageView(
+          controller: _controller,
+          onPageChanged: _onPageChanged,
+          children: _pages,
+        ),
       ),
     );
   }
