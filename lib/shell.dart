@@ -107,7 +107,6 @@ class _MainShellState extends State<MainShell> {
                 child: Center(
                   child: SizedBox(
                     width: 36,
-                    height: 36,
                     child: SvgPicture.asset(
                       "assets/logo/logo.svg",
                       colorFilter: ColorFilter.mode(

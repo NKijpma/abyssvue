@@ -1,3 +1,6 @@
+add touch controls like double tap to show bar
+
+use class animatedicon for smooth morphing from icon to icon
 
 icons are a mess (low res splashscreen, unevenness and non adaptive) ( icon is now made into a svg)
 
