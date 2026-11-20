@@ -10,7 +10,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   fvp.registerWith(
-    options: {
+    options: const {
       'platforms': ['windows', 'linux', 'macos'],
     },
   );

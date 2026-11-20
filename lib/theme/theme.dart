@@ -27,7 +27,7 @@ ThemeData buildTheme(
     appBarTheme: AppBarTheme(
       elevation: 0,
       scrolledUnderElevation: 0,
-      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.8),
+      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.95),
       foregroundColor: colorScheme.onPrimaryContainer,
     ),
 
@@ -76,21 +76,21 @@ class ThemeConfig {
   });
 }
 
-final Map<AppThemes, ThemeConfig> themeConfigs = {
-  AppThemes.nineAnime: const ThemeConfig(Color(0xFF5a2e98)),
+const Map<AppThemes, ThemeConfig> themeConfigs = {
+  AppThemes.nineAnime: ThemeConfig(Color(0xFF5a2e98)),
 
-  AppThemes.grayscale: const ThemeConfig(
+  AppThemes.grayscale: ThemeConfig(
     Color(0xFF333333),
     variant: DynamicSchemeVariant.neutral,
   ),
 
-  AppThemes.vampiric: const ThemeConfig(
+  AppThemes.vampiric: ThemeConfig(
     Color(0xFFd53c6a),
     variant: DynamicSchemeVariant.vibrant,
   ),
 
   // grabs color from users wallpaper to style the app(still needs to be made)
-  AppThemes.dynamic: const ThemeConfig(Color(0xFFd53c6a)),
+  AppThemes.dynamic: ThemeConfig(Color(0xFFd53c6a)),
 };
 
 class Home extends StatelessWidget {

@@ -11,15 +11,15 @@ class ReadPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               child: Image.asset(
                 "assets/images/placeholder.png",
-                width: 110,
+                width: 100,
                 height: 150,
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 2),
             Text(
               "bookie pookie",
               style: Theme.of(context).textTheme.bodyLarge

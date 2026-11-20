@@ -81,11 +81,13 @@ class _MainShellState extends State<MainShell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight + 4),
         child: AnimatedSlide(
           offset: bars ? Offset.zero : const Offset(0, -1.3),
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(18, 2, 18, 2),
@@ -177,7 +179,7 @@ class _MainShellState extends State<MainShell> {
 
       bottomNavigationBar: AnimatedSlide(
         offset: bars ? Offset.zero : const Offset(0, 1.3),
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
         child: Padding(
           padding: EdgeInsets.fromLTRB(

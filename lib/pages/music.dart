@@ -47,7 +47,14 @@ class _MusicPageState extends State<MusicPage>
   Future<List<Song>> _loadSongsFromAssets() async {
     final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
 
-    const allowedFileTypes = ['.mp3', '.m4a', '.wav', '.flac', '.aac', '.ogg'];
+    const allowedFileTypes = <String>[
+      '.mp3',
+      '.m4a',
+      '.wav',
+      '.flac',
+      '.aac',
+      '.ogg',
+    ];
 
     return manifest
         .listAssets()
