@@ -2,10 +2,12 @@ add touch controls like double tap to show bar
 
 use class animatedicon for smooth morphing from icon to icon
 
-gridview builder (use a delegate)
-make sure to
 
-icons are a mess (low res splashscreen, unevenness and non adaptive) ( icon is now made into a svg look into making a high res image for splashscreen)
+on video pause pushBackdropFilter
+
+gridview builder (use a delegate)
+
+app icon is a mess (low res splashscreen, unevenness and non adaptive) ( icon is now made into a svg look into making a high res image for splashscreen)
 
 move the logo down a bit on the 1024 x 1024 canvas (2 nods down)
 maybe to the right too!?
@@ -15,8 +17,6 @@ https://pub.dev/packages/flutter_tts
 https://pub.dev/packages/flutter_native_splash
 https://pub.dev/packages/share_plus
 https://pub.dev/packages/path_provider
-
-on app restart hideBars breaks and sometimes it is unresponsive you click a song nothing happens
 
 dynamic coloring(pull from background)
 
@@ -37,6 +37,8 @@ when clicking logo 5x times allow developer options such as custom fonts etc
 possible easy file sharing through app
 
 rating system for read ( 1 through 10 with decimals )
+
+updatable tracker / tags to sort
 
 connect to yt-dlp for easy video/music downloading / or listening
 

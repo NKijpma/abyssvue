@@ -125,6 +125,8 @@ class SettingsPage extends StatelessWidget {
 
           // custom link for downloading / scrapping files
           // jellyfin / plex link / api
+
+          // donate link to kofi idk
         ],
       ),
     );
