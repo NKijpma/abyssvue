@@ -28,12 +28,11 @@ class _MainShellState extends State<MainShell> {
 
   bool bars = true;
 
-  List<Widget> get _pages =>
-      [
-        MusicPage(onHideBars: _hideBars, onShowBars: _showBars),
-        const ReadPage(),
-        const VideoPage(),
-      ];
+  List<Widget> get _pages => [
+    MusicPage(onHideBars: _hideBars, onShowBars: _showBars),
+    const ReadPage(),
+    const VideoPage(),
+  ];
   final PageController _controller = PageController(initialPage: 1);
 
   @override
@@ -97,7 +96,7 @@ class _MainShellState extends State<MainShell> {
             child: ClipRRect(
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(23)),
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 13, sigmaY: 13),
+                filter: ImageFilter.blur(sigmaX: 13, sigmaY: 9),
                 child: AppBar(
                   // add easter egg if player click logo x amount of times
                   leading: InkWell(
@@ -113,10 +112,7 @@ class _MainShellState extends State<MainShell> {
                         child: SvgPicture.asset(
                           "assets/logo/logo.svg",
                           colorFilter: ColorFilter.mode(
-                            Theme
-                                .of(context)
-                                .colorScheme
-                                .onPrimaryContainer,
+                            Theme.of(context).colorScheme.onPrimaryContainer,
                             BlendMode.srcIn,
                           ),
                         ),
@@ -194,14 +190,12 @@ class _MainShellState extends State<MainShell> {
             13,
             3,
             13,
-            3 + MediaQuery
-                .viewPaddingOf(context)
-                .bottom,
+            3 + MediaQuery.viewPaddingOf(context).bottom,
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(23),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 13, sigmaY: 13),
+              filter: ImageFilter.blur(sigmaX: 13, sigmaY: 9),
 
               child: MediaQuery.removePadding(
                 context: context,

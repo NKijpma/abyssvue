@@ -13,11 +13,12 @@ class ReadPage extends StatelessWidget {
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 16,
-            childAspectRatio: 0.48,
+            childAspectRatio: 0.57,
           ),
 
-          children: [
-            Card(
+          children: List.generate(
+            100,
+            (index) => Card(
               elevation: 0,
               color: Theme.of(context).colorScheme.surfaceContainerLow,
 
@@ -58,7 +59,7 @@ class ReadPage extends StatelessWidget {
                 ),
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -1,7 +1,15 @@
+This should be 1152×1152 pixels, and fit within a circle 768 pixels in diameter.
+
+safe how far the user scrolled on each tab and save watch / view history
+
 add touch controls like double tap to show bar
 
 use class animatedicon for smooth morphing from icon to icon
 
+when book clicked the cover image of the book zooms in fills the screen then it swipes to the left (or opens)can be achieved by sliding left and
+
+add allowing sub directories /usersphone/storage/(MyVideos)/((Overlord))
+sees everything in myvideos and groups / adds a folder in the app for the overlord directory
 
 on video pause pushBackdropFilter
 
@@ -47,6 +55,12 @@ add animation for clicking settings / half a turn when clicked
 add a refresh button to reload files
 
 find out about logistic of a download from website / link in settings
+
+// cleans out old app icons
+flutter clean
+
+// remakes the app icons
+dart run flutter_launcher_icons
 
 // release version of the app (less laggy because no debug functionality)
 flutter run -d adb-RZCY60NV74V-a82ZhL._adb-tls-connect._tcp --release

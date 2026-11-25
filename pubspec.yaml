@@ -41,7 +41,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Packages used in the app
+  # Flutter packages used in the app
   # For showing / using SVG's
   flutter_svg: ^2.5.0
   # Local Storage / share states
