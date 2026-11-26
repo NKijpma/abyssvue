@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 // pages
-import '../pages/settings.dart';
-import '../shell.dart';
+import '../pages/settings.dart' show AppThemes, themeToggle, themeState;
+import '../shell.dart' show MainShell;
 
 ThemeData buildTheme(
-  Brightness brightness,
-  Color seedColor, {
+  Brightness brightness, {
+  Color? seedColor,
   DynamicSchemeVariant variant = DynamicSchemeVariant.tonalSpot,
 }) {
   final colorScheme = ColorScheme.fromSeed(
-    seedColor: seedColor,
+    seedColor: seedColor ?? const Color(0xFF5a2e98),
     brightness: brightness,
     dynamicSchemeVariant: variant,
   );
@@ -20,7 +20,7 @@ ThemeData buildTheme(
     fontFamily: 'Jetbrains',
     colorScheme: colorScheme,
     // maybe change splash idk yet look at wiki for splashfac types
-    splashFactory: InkRipple.splashFactory,
+    splashFactory: InkSparkle.splashFactory,
     splashColor: colorScheme.onSecondary.withValues(alpha: 0.5),
     highlightColor: colorScheme.onSecondary.withValues(alpha: 0.1),
 
@@ -79,18 +79,19 @@ class ThemeConfig {
 const Map<AppThemes, ThemeConfig> themeConfigs = {
   AppThemes.nineAnime: ThemeConfig(Color(0xFF5a2e98)),
 
-  AppThemes.grayscale: ThemeConfig(
-    Color(0xFF333333),
-    variant: DynamicSchemeVariant.neutral,
+  AppThemes.cerulean: ThemeConfig(Color(0xFF008FBE)),
+
+  AppThemes.pollinated: ThemeConfig(
+    Color(0xFFF9D016), // F9D016
+    variant: DynamicSchemeVariant.vibrant,
   ),
+
+  AppThemes.spruce: ThemeConfig(Color(0xFF2E5730)),
 
   AppThemes.vampiric: ThemeConfig(
     Color(0xFFd53c6a),
     variant: DynamicSchemeVariant.vibrant,
   ),
-
-  // grabs color from users wallpaper to style the app(still needs to be made)
-  AppThemes.dynamic: ThemeConfig(Color(0xFFd53c6a)),
 };
 
 class Home extends StatelessWidget {
@@ -104,16 +105,16 @@ class Home extends StatelessWidget {
         return ValueListenableBuilder<AppThemes>(
           valueListenable: themeState,
           builder: (context, currentTheme, _) {
+            final brightness = isDark ? Brightness.dark : Brightness.light;
             final theme =
                 themeConfigs[currentTheme] ??
                 const ThemeConfig(Color(0xFF5a2e98));
-            final brightness = isDark ? Brightness.dark : Brightness.light;
 
             return MaterialApp(
-              debugShowCheckedModeBanner: false,
+              debugShowCheckedModeBanner: false, // remove when app is done
               theme: buildTheme(
                 brightness,
-                theme.seedColor,
+                seedColor: theme.seedColor,
                 variant: theme.variant,
               ),
               home: const MainShell(),

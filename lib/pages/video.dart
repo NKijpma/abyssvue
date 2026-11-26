@@ -48,7 +48,7 @@ class VideoPage extends StatelessWidget {
                       maxLines: 1,
                     ),
                     Text(
-                      "after market pliers",
+                      "market pliers",
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),

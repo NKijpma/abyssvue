@@ -93,10 +93,13 @@ class _MainShellState extends State<MainShell> {
           curve: Curves.easeInOut,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(13, 3, 13, 3),
+
             child: ClipRRect(
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(23)),
+
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 13, sigmaY: 9),
+
                 child: AppBar(
                   // add easter egg if player click logo x amount of times
                   leading: InkWell(

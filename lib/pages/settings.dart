@@ -5,9 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 enum AppThemes {
   nineAnime("9 Anime"),
-  grayscale("Grayscale"),
-  vampiric("Vampiric"),
-  dynamic("Dynamic");
+  cerulean("Cerulean"),
+  pollinated("Pollinated"),
+  spruce("Spruce"),
+  vampiric("Vampiric");
 
   final String displayName;
 
@@ -102,7 +103,9 @@ class SettingsPage extends StatelessWidget {
                 leading: const Icon(LucideIcons200.palette),
                 title: const Text("App Theme"),
                 trailing: DropdownButton<AppThemes>(
-                  value: currentTheme,
+                  value: AppThemes.values.contains(currentTheme)
+                      ? currentTheme
+                      : AppThemes.nineAnime,
                   underline: const SizedBox(),
                   onChanged: (newTheme) {
                     if (newTheme != null) {
