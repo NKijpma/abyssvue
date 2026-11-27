@@ -8,7 +8,7 @@ class ReadPage extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: GridView(
+        child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10,
@@ -16,9 +16,10 @@ class ReadPage extends StatelessWidget {
             childAspectRatio: 0.57,
           ),
 
-          children: List.generate(
-            100,
-            (index) => Card(
+          itemCount: 100,
+
+          itemBuilder: (context, index) {
+            return Card(
               elevation: 0,
               color: Theme.of(context).colorScheme.surfaceContainerLow,
 
@@ -58,8 +59,8 @@ class ReadPage extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

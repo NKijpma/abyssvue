@@ -12,7 +12,7 @@ class VideoPage extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.fromLTRB(10, 5, 10, 2),
-        child: GridView(
+        child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10,
@@ -20,9 +20,10 @@ class VideoPage extends StatelessWidget {
             childAspectRatio: 1.15,
           ),
 
-          children: List.generate(
-            100,
-            (index) => Card(
+          itemCount: 10,
+
+          itemBuilder: (context, index) {
+            return Card(
               elevation: 0,
               color: Theme.of(context).colorScheme.surfaceContainerLow,
               child: Padding(
@@ -41,7 +42,7 @@ class VideoPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Video #$index",
+                      "9 nights at skiriit  pt#$index +",
                       style: Theme.of(context).textTheme.bodyLarge
                           ?.copyWith(fontWeight: FontWeight.bold),
                       overflow: TextOverflow.ellipsis,
@@ -58,8 +59,8 @@ class VideoPage extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

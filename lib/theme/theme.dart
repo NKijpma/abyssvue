@@ -24,11 +24,18 @@ ThemeData buildTheme(
     splashColor: colorScheme.onSecondary.withValues(alpha: 0.5),
     highlightColor: colorScheme.onSecondary.withValues(alpha: 0.1),
 
-    appBarTheme: AppBarTheme(
+    appBarTheme: AppBarThemeData(
       elevation: 0,
       scrolledUnderElevation: 0,
-      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.8),
+      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.7),
       foregroundColor: colorScheme.onPrimaryContainer,
+    ),
+
+    snackBarTheme: SnackBarThemeData(
+      elevation: 0,
+      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.7),
+      contentTextStyle: TextStyle(color: colorScheme.onPrimaryContainer),
+      dismissDirection: DismissDirection.horizontal,
     ),
 
     searchViewTheme: SearchViewThemeData(
@@ -45,7 +52,7 @@ ThemeData buildTheme(
 
     navigationBarTheme: NavigationBarThemeData(
       height: 58,
-      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.8),
+      backgroundColor: colorScheme.surfaceContainer.withValues(alpha: 0.7),
       indicatorColor: colorScheme.primaryContainer,
       indicatorShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(23),
@@ -79,14 +86,20 @@ class ThemeConfig {
 const Map<AppThemes, ThemeConfig> themeConfigs = {
   AppThemes.nineAnime: ThemeConfig(Color(0xFF5a2e98)),
 
-  AppThemes.cerulean: ThemeConfig(Color(0xFF008FBE)),
-
-  AppThemes.pollinated: ThemeConfig(
-    Color(0xFFF9D016), // F9D016
+  AppThemes.cerulean: ThemeConfig(
+    Color(0xFF008FBE),
     variant: DynamicSchemeVariant.vibrant,
   ),
 
-  AppThemes.spruce: ThemeConfig(Color(0xFF2E5730)),
+  AppThemes.pollinated: ThemeConfig(
+    Color(0xFFF9D016), // 0xFFF9D016
+    variant: DynamicSchemeVariant.vibrant,
+  ),
+
+  AppThemes.spruce: ThemeConfig(
+    Color(0xFF2E5730),
+    variant: DynamicSchemeVariant.vibrant,
+  ),
 
   AppThemes.vampiric: ThemeConfig(
     Color(0xFFd53c6a),

@@ -13,8 +13,6 @@ sees everything in myvideos and groups / adds a folder in the app for the overlo
 
 on video pause pushBackdropFilter
 
-gridview builder (use a delegate)
-
 app icon is a mess (low res splashscreen, unevenness and non adaptive) ( icon is now made into a svg look into making a high res image for splashscreen)
 
 move the logo down a bit on the 1024 x 1024 canvas (2 nods down)

@@ -24,7 +24,13 @@ class _MainShellState extends State<MainShell> {
   int _selectedIndex = 1;
   bool _isNavigatingFromTap = false;
   bool _isNavigating = false;
+
+  // gear animations
   double _turns = 0.0;
+
+  // extra features
+  int _logoTapCount = 0;
+  bool _developerMode = false;
 
   bool bars = true;
 
@@ -103,12 +109,32 @@ class _MainShellState extends State<MainShell> {
                 child: AppBar(
                   // add easter egg if player click logo x amount of times
                   leading: InkWell(
-                    borderRadius: BorderRadius.circular(23),
+                    borderRadius: BorderRadius.circular(46),
                     onTap: () {
                       if (hapticToggle.value) {
                         HapticFeedback.vibrate();
                       }
+                      _logoTapCount++;
+
+                      if (_logoTapCount >= 5) {
+                        _logoTapCount = 0;
+                        _developerMode = !_developerMode;
+
+                        ScaffoldMessenger.of(context)
+                          ..clearSnackBars()
+                          ..showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                _developerMode
+                                    ? "Developer mode on"
+                                    : "Developer mode off",
+                              ),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                      }
                     },
+
                     child: Center(
                       child: SizedBox(
                         width: 36,
